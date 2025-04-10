@@ -1,0 +1,152 @@
+### Variáveis globais
+@baseUrl = http://localhost:8080/api
+@contentType = application/json
+
+### Listar todas as pessoas
+GET {{baseUrl}}/pessoas
+Content-Type: {{contentType}}
+
+### Criar uma nova pessoa com endereço
+POST {{baseUrl}}/pessoas
+Content-Type: {{contentType}}
+
+{
+    "nome": "João Silva",
+    "cpf": "12345678901",
+    "dataNascimento": "1990-01-01",
+    "enderecos": [
+        {
+            "rua": "Rua das Flores",
+            "numero": "123",
+            "bairro": "Centro",
+            "cidade": "São Paulo",
+            "estado": "SP",
+            "cep": "01234-567",
+            "enderecoPrincipal": true
+        }
+    ]
+}
+
+### Tentar criar pessoa com CPF duplicado
+POST {{baseUrl}}/pessoas
+Content-Type: {{contentType}}
+
+{
+    "nome": "Maria Silva",
+    "cpf": "12345678901",
+    "dataNascimento": "1995-05-15",
+    "enderecos": []
+}
+
+### Buscar pessoa por ID
+GET {{baseUrl}}/pessoas/1
+Content-Type: {{contentType}}
+
+### Atualizar pessoa existente
+PUT {{baseUrl}}/pessoas/1
+Content-Type: {{contentType}}
+
+{
+    "nome": "João Silva Atualizado",
+    "cpf": "12345678901",
+    "dataNascimento": "1990-01-01",
+    "enderecos": [
+        {
+            "rua": "Rua das Flores",
+            "numero": "123",
+            "bairro": "Centro",
+            "cidade": "São Paulo",
+            "estado": "SP",
+            "cep": "01234-567",
+            "enderecoPrincipal": true
+        },
+        {
+            "rua": "Avenida Principal",
+            "numero": "456",
+            "bairro": "Jardins",
+            "cidade": "São Paulo",
+            "estado": "SP",
+            "cep": "04567-890",
+            "enderecoPrincipal": false
+        }
+    ]
+}
+
+### Atualizar apenas endereço da pessoa
+PUT {{baseUrl}}/pessoas/1
+Content-Type: {{contentType}}
+
+{
+    "nome": "João Silva",
+    "cpf": "12345678901",
+    "dataNascimento": "1990-01-01",
+    "enderecos": [
+        {
+            "rua": "Nova Rua",
+            "numero": "789",
+            "bairro": "Novo Bairro",
+            "cidade": "São Paulo",
+            "estado": "SP",
+            "cep": "09876-543",
+            "enderecoPrincipal": true
+        }
+    ]
+}
+
+### Deletar pessoa
+DELETE {{baseUrl}}/pessoas/1
+Content-Type: {{contentType}}
+
+### Tentar buscar pessoa deletada
+GET {{baseUrl}}/pessoas/1
+Content-Type: {{contentType}}
+
+### Criar pessoa sem endereço
+POST {{baseUrl}}/pessoas
+Content-Type: {{contentType}}
+
+{
+    "nome": "Ana Santos",
+    "cpf": "98765432101",
+    "dataNascimento": "1988-12-31"
+}
+
+### Criar pessoa com dados inválidos
+POST {{baseUrl}}/pessoas
+Content-Type: {{contentType}}
+
+{
+    "nome": "",
+    "cpf": "",
+    "dataNascimento": "2025-01-01"
+}
+
+### Criar pessoa com múltiplos endereços
+POST {{baseUrl}}/pessoas
+Content-Type: {{contentType}}
+
+{
+    "nome": "Carlos Oliveira",
+    "cpf": "45678912301",
+    "dataNascimento": "1985-06-15",
+    "enderecos": [
+        {
+            "rua": "Rua Principal",
+            "numero": "100",
+            "bairro": "Centro",
+            "cidade": "Rio de Janeiro",
+            "estado": "RJ",
+            "cep": "20000-000",
+            "enderecoPrincipal": true
+        },
+        {
+            "rua": "Rua Comercial",
+            "numero": "200",
+            "bairro": "Downtown",
+            "cidade": "Rio de Janeiro",
+            "estado": "RJ",
+            "cep": "20100-000",
+            "enderecoPrincipal": false
+        }
+    ]
+}
